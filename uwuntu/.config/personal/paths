@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+addToPathFront /home/pckill3r/bin
+addToPathFront $DENO_INSTALL
+addToPath /home/pckill3r/personal/lua-language-server/bin/Linux
+addToPath /usr/local/go/bin
+addToPath $GOPATH/bin
+addToPath $HOME/work/wrapper
+addToPath $HOME/.yarn/bin
+addToPath /usr/lib/llvm-8/bin
+addToPath $HOME/personal/uhh/build
+addToPath $HOME/.cargo/bin
+addToPath $HOME/.rustup
+
+# ccache
+addToPathFront /usr/lib/ccache
