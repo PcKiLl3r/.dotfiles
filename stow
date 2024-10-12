@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 # I am using zsh instead of bash.  I was having some troubles using bash with
 # arrays.  Didn't want to investigate, so I just did zsh
+if [ -z "${DOTFILES}" ]; then
+    echo "No DOTFILES variable was set";
+    exit 1; 
+fi
+
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
