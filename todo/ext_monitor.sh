@@ -5,5 +5,5 @@ case "$1" in
     echo "Second monitor turned on." ;;
     off) xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 --output HDMI-1 --off
     echo "Second monitor turned off." ;;
-    *) printf '%s\n' "You must provide an argument: DP, HDMI or DUAL" ;;
+    *) printf '%s\n' "You must provide an argument: \"on\" or \"off\"" ;;
 esac
