@@ -34,6 +34,13 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
+exec_always --no-startup-id xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 --output HDMI-1 --mode 3840x2160 --pos 2880x0 --scale 1x1
+
+# exec --no-startup-id feh --bg-fill --bg-scale --zoom fill ~/bg.jpg
+
+exec --no-startup-id nitrogen --set-zoom-fill ~/machine/images/backgrounds/bg.jpg --head=0
+exec --no-startup-id nitrogen --set-zoom-fill ~/machine/images/backgrounds/bg.jpg --head=1
+
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
