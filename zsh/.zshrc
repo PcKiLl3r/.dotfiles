@@ -111,8 +111,8 @@ export BUN_INSTALL="/home/pckill3r/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Bun
-export BUN_INSTALL="/home/pckill3r/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+#export BUN_INSTALL="/home/pckill3r/.bun"
+#export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pnpm
 export PNPM_HOME="/home/pckill3r/.local/share/pnpm"
