@@ -32,6 +32,7 @@ addToPathFront $HOME/.local/scripts
 addToPathFront $HOME/.local/bin
 addToPathFront $HOME/.local/n/bin/
 addToPathFront $HOME/.local/go/bin
+addToPathFront $HOME/.machine/utils
 addToPathFront $HOME/go/bin
 addToPathFront $HOME/personal/sumneko/bin
 addToPathFront $HOME/.deno/bin
