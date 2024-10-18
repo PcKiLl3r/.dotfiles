@@ -34,7 +34,7 @@ exec --no-startup-id dex-autostart --autostart --environment i3
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-exec_always --no-startup-id ~/.machine/utils/ext_mon_toggle.sh
+exec_always --no-startup-id ~/.machine/utils/ext_mon_toggle
 
 # exec --no-startup-id feh --bg-fill --bg-scale --zoom fill ~/bg.jpg
 

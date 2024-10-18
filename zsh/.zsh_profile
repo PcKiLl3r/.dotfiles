@@ -25,6 +25,9 @@ export DENO_INSTALL="$HOME/.deno"
 export N_PREFIX="$HOME/.local/n"
 export DOTFILES=$HOME/.dotfiles
 export BOGART=$HOME/work/bogart
+export DEV_ENV_HOME="$HOME/.machine/ansible-setup"
+dev_env() {
+}
 
 addToPathFront $HOME/.zig
 addToPathFront $HOME/.local/.npm-global/bin
