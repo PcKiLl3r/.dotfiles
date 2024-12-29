@@ -114,10 +114,12 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 #export BUN_INSTALL="/home/pckill3r/.bun"
 #export PATH="$BUN_INSTALL/bin:$PATH"
 
+export JAVA_HOME=/usr/bin/android-studio/jre
 # pnpm
 export PNPM_HOME="/home/pckill3r/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
+
 # Turso
 export PATH="/home/pckill3r/.turso:$PATH"
 
@@ -136,3 +138,4 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+export PATH=$PATH:/usr/lib64/openmpi/bin
