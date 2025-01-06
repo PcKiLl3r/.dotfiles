@@ -139,3 +139,9 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 export PATH=$PATH:/usr/lib64/openmpi/bin
+export PATH=/usr/local/openmpi/bin:$PATH
+export LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH
+export PATH=/usr/lib64/openmpi/bin:$PATH
+export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
+export PRTE_MCA_plm=ssh
+export PATH=/usr/lib64/openmpi/bin/prted:$PATH

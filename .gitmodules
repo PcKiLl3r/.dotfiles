@@ -1,9 +1,9 @@
 [submodule "nvim/.config/nvim"]
 	path = nvim/.config/nvim
 	url = https://github.com/PcKiLl3r/init.lua
-[submodule "machine/.machine/ansible-setup"]
-	path = machine/.machine/ansible-setup
-	url = https://github.com/PcKiLl3r/linux-dev-playbook.git
+#[submodule "machine/.machine/ansible-setup"]
+#	path = machine/.machine/ansible-setup
+#	url = https://github.com/PcKiLl3r/linux-dev-playbook.git
 [submodule "work/work"]
 	path = work/work
 	url = https://github.com/pckill3r/work
