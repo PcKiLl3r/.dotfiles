@@ -10,3 +10,6 @@ uninstall nano-default-editor
 git config --global rerere.enabled true
 
 git config --global rebase.autoStash true
+
+start using ghostty
+    - faster terimnal
