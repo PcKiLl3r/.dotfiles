@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+find_ready_tmux() {
+    local current_dir="$1"
+    while [[ "$current_dir" != "$HOME" && "$current_dir" != "/" ]]; do
+        if [[ -f "$current_dir/.ready-tmux" ]]; then
+            echo "$current_dir/.ready-tmux"
+            return 0
+        fi
+        current_dir="$(dirname "$current_dir")"
+    done
+
+    if [[ -f "$HOME/.ready-tmux" ]]; then
+        echo "$HOME/.ready-tmux"
+        return 0
+    fi
+    return 1
+}
+
+switch_to() {
+    if [[ -z $TMUX ]]; then
+        tmux attach-session -t "$1"
+    else
+        tmux switch-client -t "$1"
+    fi
+}
+
+has_session() {
+    tmux list-sessions | grep -q "^$1:"
+}
+
+hydrate() {
+    local ready_tmux=$(find_ready_tmux "$2")
+    if [[ -n "$ready_tmux" ]]; then
+        tmux send-keys -t "$1" "source $ready_tmux" C-m
+    fi
+}
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/ ~/work ~/work/angular ~/personal ~/learn ~/Downloads -mindepth 1 -maxdepth 2 -type d | fzf)
+fi
+
+[[ -z $selected ]] && exit 0
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s "$selected_name" -c "$selected"
+    hydrate "$selected_name" "$selected"
+    exit 0
+fi
+
+if ! has_session "$selected_name"; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+    hydrate "$selected_name" "$selected"
+fi
+
+switch_to "$selected_name"

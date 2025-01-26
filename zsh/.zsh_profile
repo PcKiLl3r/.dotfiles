@@ -43,6 +43,11 @@ addToPathFront $HOME/.deno/bin
 # Where should I put you?
 bindkey -s ^f "tmux-sessionizer\n"
 
+bindkey -s ^s "tmux-initializer\n"
+
+bindkey -s ^t "find-todo\n"
+
+
 #bindkey -s ^r "fzf-history\n"
 
 # Function to execute the fzf_history script

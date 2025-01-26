@@ -6,4 +6,13 @@
 #	url = https://github.com/PcKiLl3r/linux-dev-playbook.git
 [submodule "work/work"]
 	path = work/work
-	url = https://github.com/pckill3r/work
+	url = https://github.com/PcKiLl3r/work
+[submodule "personal/personal/custom-dev-exp/linux-dev-playbook"]
+	path = personal/personal/custom-dev-exp/linux-dev-playbook
+	url = https://github.com/PcKiLl3r/linux-dev-playbook
+[submodule "personal/personal/custom-dev-exp/prime-dev"]
+	path = personal/personal/custom-dev-exp/prime-dev
+	url = https://github.com/ThePrimeagen/dev
+[submodule "personal/personal"]
+	path = personal/personal
+	url = https://github.com/PcKiLl3r/personal
