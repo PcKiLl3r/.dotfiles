@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+HISTTIMEFORMAT= history | \
+  fzf \
+    --tac \
+    --tiebreak=index \
+    --no-sort \
+    --exact \
+    --preview 'echo {}' \
+    --preview-window up:3:hidden:wrap \
+    --bind '?:toggle-preview' | \
+  sed 's/^ *[0-9]* *//' | \
+  tee >(xclip -selection clipboard) \
+  >(echo -n "> $(cat)" >&2)

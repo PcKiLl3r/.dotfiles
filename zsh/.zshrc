@@ -1,3 +1,5 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/home/zorko/.zsh/completions:"* ]]; then export FPATH="/home/zorko/.zsh/completions:$FPATH"; fi
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -120,6 +122,9 @@ export PNPM_HOME="/home/pckill3r/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 # pnpm end
 
+export EDITOR=nvim
+export VISUAL=nvim
+
 # Turso
 export PATH="/home/pckill3r/.turso:$PATH"
 
@@ -144,8 +149,10 @@ export LD_LIBRARY_PATH=/usr/local/openmpi/lib:$LD_LIBRARY_PATH
 export PRTE_MCA_plm=ssh
 export PATH=/usr/lib64/openmpi/bin/prted:$PATH
 
-export PATH=/usr/lib64/openmpi/bin:$PATH
-export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
-export MPI_HOME=/usr/lib64/openmpi
-export MPI_INCLUDE=/usr/include/openmpi
-export MPI_LIB=/usr/lib64/openmpi
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+. "/home/zorko/.deno/env"
