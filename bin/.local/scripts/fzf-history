@@ -1,14 +1,14 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
-HISTTIMEFORMAT= history | \
-  fzf \
-    --tac \
-    --tiebreak=index \
-    --no-sort \
-    --exact \
-    --preview 'echo {}' \
-    --preview-window up:3:hidden:wrap \
-    --bind '?:toggle-preview' | \
-  sed 's/^ *[0-9]* *//' | \
-  tee >(xclip -selection clipboard) \
-  >(echo -n "> $(cat)" >&2)
+# Fetch Zsh history from the history file
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+
+# Read the history file, sort by most recently used, and pass to fzf
+#selected_command=$(tac "$HISTFILE" | awk -F ';' '{print $2}' | fzf --layout=reverse --height=40% --border --no-multi)
+selected_command=$(tac "$HISTFILE" | awk -F ';' '{print $2}' | fzf --height=100% --border --no-multi)
+
+# Check if a command was selected
+if [[ -n $selected_command ]]; then
+  # Print the selected command to stdout for the ZLE function
+  printf "%s" "$selected_command"
+fi
