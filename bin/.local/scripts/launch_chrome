@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+declare -A PROFILES=(
+  ["Personal"]=Default
+  ["Work"]="Profile 2"
+)
+
+choice=$(printf '%s\n' "${!PROFILES[@]}" \
+         | dmenu -l 8 -p 'Chrome profile:')
+
+# if no choice, quit
+[[ -z $choice ]] && exit 0
+
+# launch in background, detach, and silence all output
+nohup google-chrome-stable \
+    --profile-directory="${PROFILES[$choice]}" \
+    >/dev/null 2>&1 &
+
+# remove job from shell’s job table
+disown

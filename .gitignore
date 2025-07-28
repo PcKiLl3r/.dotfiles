@@ -3,3 +3,6 @@ bin/.local/bin
 
 nvim/.config/nvim/plugin/packer_compiled.lua
 nvim/.config/nvim/lazy-lock.json
+
+vpn/.config/vpn/Agenda/
+

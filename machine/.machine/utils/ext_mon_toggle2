@@ -25,34 +25,36 @@ set_wallpaper() {
 configure_monitors() {
     local scale="$1"
 
-    if xrandr | grep "HDMI-1 connected" > /dev/null; then
-        echo "Second monitor detected. Turning on..."
+    # Detect external monitor (exclude eDP-1)
+    EXTERNAL_MONITOR=$(xrandr | awk '/ connected/ && $1 != "eDP-1" { print $1; exit }')
 
-        HDMI_RESOLUTION=$(xrandr | grep -A1 "HDMI-1 connected" | tail -n1 | awk '{print $1}')
-        echo "Using resolution $HDMI_RESOLUTION for HDMI-1."
+    if [ -n "$EXTERNAL_MONITOR" ]; then
+        echo "External monitor detected: $EXTERNAL_MONITOR"
 
-        # Apply monitor configuration
-        xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 \
-               --output HDMI-1 --mode "$HDMI_RESOLUTION" --pos 2880x0 --scale "${scale}x${scale}"
+        RESOLUTION=$(xrandr | grep -A1 "^$EXTERNAL_MONITOR connected" | awk 'NR==2 { print $1 }')
+        echo "Using resolution $RESOLUTION for $EXTERNAL_MONITOR."
 
-        # Ensure HDMI-1 is fully available before setting the wallpaper
-        while ! xrandr | grep "HDMI-1 connected" > /dev/null; do
-            echo "Waiting for HDMI-1 to become available..."
-            sleep 1
-        done
+        # Configure extended layout
+        xrandr \
+          --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 \
+          --output "$EXTERNAL_MONITOR" --mode "$RESOLUTION" --pos 2880x0 --scale "${scale}x${scale}"
 
         set_wallpaper "$IMG_NAME"
     else
-        echo "No second monitor detected. Turning off..."
-
-        xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 --output HDMI-1 --off
+        echo "No external monitor detected. Disabling others..."
+        xrandr \
+          --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --scale 1.5x1.5 \
+          --output HDMI-1 --off \
+          --output DP-3-1 --off \
+          --output DP-3-2 --off \
+          --output DP-3-3 --off
         set_wallpaper "$IMG_NAME"
     fi
 }
 
 # Parse arguments
 SCALE_EXTERNAL=1.75
-IMG_NAME="$DEFAULT_WALLPAPER"  # Default wallpaper
+IMG_NAME="$DEFAULT_WALLPAPER"
 
 for arg in "$@"; do
     case "$arg" in
@@ -73,5 +75,4 @@ for arg in "$@"; do
     esac
 done
 
-# Run the monitor configuration
 configure_monitors "$SCALE_EXTERNAL"

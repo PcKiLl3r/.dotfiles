@@ -1,3 +1,5 @@
+#zmodload zsh/zprof
+
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":/home/zorko/.zsh/completions:"* ]]; then export FPATH="/home/zorko/.zsh/completions:$FPATH"; fi
 # If you come from bash you might have to change your $PATH.
@@ -72,7 +74,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git) #zsh-autosuggestions zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -152,10 +154,53 @@ export PATH=/usr/lib64/openmpi/bin/prted:$PATH
 # Load Angular CLI autocompletion.
 source <(ng completion script)
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-. "/home/zorko/.deno/env"
+# export NVM_DIR="$HOME/.config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# . "/home/zorko/.deno/env"
 
 # Android
 export ANDROID_HOME="$HOME/.local/share/android-sdk"
+
+#zprof
+ZSH_DISABLE_COMPFIX=true
+DISABLE_AUTO_UPDATE=true
+
+export GTK_THEME=Adwaita:dark
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+
+
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# On Fedora 41+, use DNF 5’s history DB to know when we last ran 'dnf upgrade'.
+hist_dir="/usr/lib/sysimage/libdnf5"
+hist_db="$hist_dir/transaction_history.sqlite"
+
+if [[ -e $hist_db ]]; then
+  # Find the most‐recently modified file in /usr/lib/sysimage/libdnf5/
+  # (could be transaction_history.sqlite, transaction_history.sqlite-wal, etc.)
+  latest_file=$(ls -t "$hist_dir"/transaction_history.sqlite* 2>/dev/null | head -n1)
+  last_ts=$(stat -c %Y "$latest_file")
+else
+  # If it doesn’t exist, assume “never updated”
+  last_ts=0
+fi
+
+now_ts=$(date +%s)
+one_week=$(( 7 * 24 * 60 * 60 ))
+
+if (( now_ts - last_ts > one_week )); then
+  echo ""
+  echo "🔔  Reminder: It looks like you haven’t updated Fedora in over a week."
+  echo "   • To install security‐only updates:  sudo dnf upgrade --security"
+  echo "   • To install all pending updates (security + bugfixes):"
+  echo "       sudo dnf upgrade"
+  echo ""
+fi
+# ─────────────────────────────────────────────────────────────────────────────

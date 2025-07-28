@@ -30,16 +30,36 @@ has_session() {
 }
 
 hydrate() {
-    local ready_tmux=$(find_ready_tmux "$2")
+    local session="$1"
+    local dir="$2"
+
+    if [[ -f "$dir/.ready-tmux" ]]; then
+        tmux send-keys -t "$session" "source $dir/.ready-tmux" C-m
+        return
+    fi
+
+    local ready_tmux
+    ready_tmux=$(find_ready_tmux "$dir")
     if [[ -n "$ready_tmux" ]]; then
-        tmux send-keys -t "$1" "source $ready_tmux" C-m
+        tmux send-keys -t "$session" "source $ready_tmux" C-m
     fi
 }
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find ~/ ~/work ~/work/angular ~/personal ~/learn ~/Downloads -mindepth 1 -maxdepth 2 -type d | fzf)
+    selected=$(
+        {
+            find -L ~/work -mindepth 1 -maxdepth 3 -type l,d -not -path "*/node_modules/*"
+            find -L ~/learn -mindepth 1 -maxdepth 2 -type l,d -not -path "*/node_modules/*"
+            find -L \
+                ~/.config/nvim \
+                ~/.dotfiles/bin/.local \
+                ~/Downloads \
+                ~/personal \
+                -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"
+        } | fzf
+    )
 fi
 
 [[ -z $selected ]] && exit 0
@@ -47,9 +67,12 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+# If tmux is NOT running, start a server first
+if [[ -z "$TMUX" && -z "$tmux_running" ]]; then
+    tmux new-session -ds "$selected_name" -c "$selected"
+    tmux start-server  # <-- Ensure the server is running
     hydrate "$selected_name" "$selected"
+    tmux attach-session -t "$selected_name"
     exit 0
 fi
 

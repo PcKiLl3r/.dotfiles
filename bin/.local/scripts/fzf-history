@@ -3,9 +3,13 @@
 # Fetch Zsh history from the history file
 HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
 
-# Read the history file, sort by most recently used, and pass to fzf
-#selected_command=$(tac "$HISTFILE" | awk -F ';' '{print $2}' | fzf --layout=reverse --height=40% --border --no-multi)
-selected_command=$(tac "$HISTFILE" | awk -F ';' '{print $2}' | fzf --height=100% --border --no-multi)
+# Read the history file in reverse, extract the command, remove duplicates (keeping latest), and pass to fzf
+selected_command=$(
+  tac "$HISTFILE" |
+  awk -F ';' '{print $2}' |
+  awk '!seen[$0]++' |
+  fzf --height=100% --border --no-multi
+)
 
 # Check if a command was selected
 if [[ -n $selected_command ]]; then
