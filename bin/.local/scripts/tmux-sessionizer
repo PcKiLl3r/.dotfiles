@@ -1,3 +1,4 @@
+#tmux-sessionizer
 #!/usr/bin/env bash
 
 switch_to() {
@@ -31,6 +32,7 @@ else
             ~/.dotfiles/bin/.local \
             ~/Downloads \
             ~/personal \
+            ~/personal/custom-dev-exp \
            -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"; } | fzf)
     # selected=$(find -L ~/work ~/personal ~/learn ~/Downloads \
     #     -mindepth 1 -maxdepth 4 -type l,d \

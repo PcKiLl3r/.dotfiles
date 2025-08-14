@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+#tmux-open
+# ===================== ENTRY DEFAULTS =====================
+# Default mode if not chosen by argv0 or flag: local | up
+DEFAULT_MODE="local"
+# =========================================================
+set -euo pipefail
+
+# shellcheck disable=SC1090
+source "$HOME/.local/scripts/tmux-common.sh"
+
+usage() {
+  cat <<EOF
+Usage: $(basename "$0") [-m local|up] [DIRECTORY]
+
+If called as 'tmux-sessionizer' -> defaults to -m local
+If called as 'tmux-initializer' -> defaults to -m up
+EOF
+}
+
+MODE="$DEFAULT_MODE"
+case "$(basename "$0")" in
+  tmux-initializer) MODE="up" ;;
+  tmux-sessionizer) MODE="local" ;;
+esac
+
+SELECTED=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -m|--mode) MODE="${2:-$MODE}"; shift 2 ;;
+    -h|--help) usage; exit 0 ;;
+    *) SELECTED="$1"; shift ;;
+  esac
+done
+
+if [[ -z "$SELECTED" ]]; then
+  SELECTED="$(pick_with_fzf || true)"
+fi
+
+[[ -z "$SELECTED" ]] && exit 0
+open_tmux_session "$SELECTED" "$MODE"

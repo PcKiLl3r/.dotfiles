@@ -1,3 +1,4 @@
+#tmux-initializer
 #!/usr/bin/env bash
 
 find_ready_tmux() {
@@ -57,6 +58,7 @@ else
                 ~/.dotfiles/bin/.local \
                 ~/Downloads \
                 ~/personal \
+                ~/personal/custom-dev-exp \
                 -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"
         } | fzf
     )
