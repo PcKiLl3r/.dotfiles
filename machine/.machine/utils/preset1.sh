@@ -3,5 +3,6 @@ set -eu
 SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
 "$SCRIPT_DIR/monitors.sh" \
   --left  auto1:big \
-  --middle auto2:big:vertical \
-  --right eDP-1
+  --middle auto2:big:vertical-right \
+  --right eDP-1 \
+  "$@"
