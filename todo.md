@@ -92,3 +92,9 @@ Kopiraj kodo
 echo "Hello from i3" | kdeconnect-cli --device <device-id> --share -
 🟢 Pro tip: You can add scripts or bind to i3 keybindings to automate text sharing.
 
+
+add kscreen and plasma-systemsettings
+
+or gnome-control-center to allow monitor setting
+
+add other similar must have gui tools to allow configuring machine
