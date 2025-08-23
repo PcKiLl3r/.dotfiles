@@ -1,5 +1,13 @@
 # .dotfiles
 
+### Stowing dotfiles
+
+Use the `stow` script to install configuration for a given window manager:
+
+```
+./stow --mode i3
+./stow --mode hyprland
+```
 Personal configuration files for setting up Linux workstations.
 
 ## Directory overview
@@ -62,4 +70,3 @@ Packages: `hyprland`, `waybar`, `wofi`, `grim`, `slurp`.
 - **Shared:** create a new top‑level folder and include it in `STOW_FOLDERS` for every setup.
 - **WM specific:** place files under `i3/` or `hypr/` and only include the folder for that window manager.
 - Run `./stow` after updating `STOW_FOLDERS` to refresh symlinks.
-
