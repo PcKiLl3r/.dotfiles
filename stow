@@ -3,7 +3,32 @@
 # arrays.  Didn't want to investigate, so I just did zsh
 if [ -z "${DOTFILES}" ]; then
     echo "No DOTFILES variable was set";
-    exit 1; 
+    exit 1;
+fi
+
+mode=""
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --mode)
+            mode="$2"; shift 2 ;;
+        --mode=*)
+            mode="${1#*=}"; shift ;;
+        *)
+            echo "Usage: $0 [--mode i3|hyprland]";
+            exit 1 ;;
+    esac
+done
+
+if [[ -n "$mode" ]]; then
+    case "$mode" in
+        i3)
+            STOW_FOLDERS="shared,fedora_i3" ;;
+        hyprland)
+            STOW_FOLDERS="shared,fedora_hyprland" ;;
+        *)
+            echo "Unknown mode: $mode";
+            exit 1 ;;
+    esac
 fi
 
 pushd $DOTFILES
