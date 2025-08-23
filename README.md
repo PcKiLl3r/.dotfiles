@@ -2,25 +2,22 @@
 
 ### Stowing dotfiles
 
-Use the `stow` script to install configuration for a given window manager:
+Use the `stow` script with a preset to install configuration for a given window manager:
 
 ```
 ./stow --mode i3
 ./stow --mode hyprland
 ```
+
+Presets live in the `presets/` directory and list which folders get stowed for each setup.
 Personal configuration files for setting up Linux workstations.
 
 ## Directory overview
 
-- `bin/` – helper scripts placed on the `PATH`.
-- `i3/.config/i3` – configuration for the i3 window manager.
-- `nvim/.config/nvim` – Neovim settings and plugins.
-- `shell/.config` – shared shell configuration.
-- `tmux/` – tmux configuration files.
-- `xkb/.config/xkb` – custom keyboard layout files.
-- `zsh/` – zsh specific settings.
+- `bin/`, `nvim/`, `shell/`, `tmux/`, `xkb/`, `zsh/` – common configs used in either environment.
+- `i3/` – configuration for the i3 window manager and status bar.
+- `hypr/` – configuration for the Hyprland compositor.
 - `personal/` and `work/` – machine‑specific overrides.
-- Add a `hypr/` directory for Hyprland configuration when using Wayland.
 
 ## Prerequisites
 
@@ -54,19 +51,16 @@ Packages: `hyprland`, `waybar`, `wofi`, `grim`, `slurp`.
    **i3:**
 
    ```sh
-   export STOW_FOLDERS="bin,nvim,shell,tmux,zsh,xkb,i3"
-   ./stow
+   ./stow --mode i3
    ```
 
    **Hyprland:**
 
    ```sh
-   export STOW_FOLDERS="bin,nvim,shell,tmux,zsh,xkb,hypr"
-   ./stow
+   ./stow --mode hyprland
    ```
 
 ## Adding new configuration
 
-- **Shared:** create a new top‑level folder and include it in `STOW_FOLDERS` for every setup.
-- **WM specific:** place files under `i3/` or `hypr/` and only include the folder for that window manager.
-- Run `./stow` after updating `STOW_FOLDERS` to refresh symlinks.
+- Add packages under the relevant folder and include them in the appropriate preset file.
+- Run `./stow --mode <preset>` after updating presets to refresh symlinks.
