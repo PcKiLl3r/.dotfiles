@@ -2,12 +2,14 @@
 
 ### Stowing dotfiles
 
-Use the `stow` script to install configuration for a given window manager:
+Use the `stow` script with a preset to install configuration for a given window manager:
 
 ```
 ./stow --mode i3
 ./stow --mode hyprland
 ```
+
+Presets live in the `presets/` directory and list which folders get stowed for each setup.
 Personal configuration files for setting up Linux workstations.
 
 ## Directory overview
@@ -54,19 +56,17 @@ Packages: `hyprland`, `waybar`, `wofi`, `grim`, `slurp`.
    **i3:**
 
    ```sh
-   export STOW_FOLDERS="bin,nvim,shell,tmux,zsh,xkb,i3"
-   ./stow
+   ./stow --mode i3
    ```
 
    **Hyprland:**
 
    ```sh
-   export STOW_FOLDERS="bin,nvim,shell,tmux,zsh,xkb,hypr"
-   ./stow
+   ./stow --mode hyprland
    ```
 
 ## Adding new configuration
 
-- **Shared:** create a new top‑level folder and include it in `STOW_FOLDERS` for every setup.
-- **WM specific:** place files under `i3/` or `hypr/` and only include the folder for that window manager.
-- Run `./stow` after updating `STOW_FOLDERS` to refresh symlinks.
+- **Shared:** create a new top‑level folder and include it in the appropriate preset files.
+- **WM specific:** place files under `i3/` or `hypr/` and update only the matching preset.
+- Run `./stow --mode <preset>` after updating presets to refresh symlinks.

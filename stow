@@ -14,21 +14,19 @@ while [[ $# -gt 0 ]]; do
         --mode=*)
             mode="${1#*=}"; shift ;;
         *)
-            echo "Usage: $0 [--mode i3|hyprland]";
+            echo "Usage: $0 [--mode PRESET]";
             exit 1 ;;
     esac
 done
 
 if [[ -n "$mode" ]]; then
-    case "$mode" in
-        i3)
-            STOW_FOLDERS="shared,fedora_i3" ;;
-        hyprland)
-            STOW_FOLDERS="shared,fedora_hyprland" ;;
-        *)
-            echo "Unknown mode: $mode";
-            exit 1 ;;
-    esac
+    preset_file="$DOTFILES/presets/$mode"
+    if [[ -f "$preset_file" ]]; then
+        STOW_FOLDERS=$(paste -sd, "$preset_file")
+    else
+        echo "Unknown mode: $mode"
+        exit 1
+    fi
 fi
 
 pushd $DOTFILES
