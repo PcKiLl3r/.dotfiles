@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Hyprland keyboard layout switcher with notification
+
+case "$1" in
+    "us"|"aoeu")
+        hyprctl switchxkblayout at-translated-set-2-keyboard 2
+        notify-send "Keyboard" "Switched to US" -t 1000
+        ;;
+    "dvorak"|"oeui")
+        hyprctl switchxkblayout at-translated-set-2-keyboard 3
+        notify-send "Keyboard" "Switched to Dvorak" -t 1000
+        ;;
+    "real-prog-dvorak"|"htns")
+        hyprctl switchxkblayout at-translated-set-2-keyboard 1
+        notify-send "Keyboard" "Switched to Real Prog Dvorak" -t 1000
+        ;;
+    "real-prog-dvo-k"|"gcrl")
+        hyprctl switchxkblayout at-translated-set-2-keyboard 0
+        notify-send "Keyboard" "Switched to Real Prog Dvo-K" -t 1000
+        ;;
+    *)
+        echo "Usage: $0 {us|dvorak|real-prog-dvorak|real-prog-dvo-k}"
+        exit 1
+        ;;
+esac

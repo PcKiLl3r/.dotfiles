@@ -2,7 +2,7 @@
 
 # Super cool keyboard stuffs.
 # Required for x applications
-setxkbmap -option caps:ctrl_modifier
+# setxkbmap -option caps:ctrl_modifier
 
 # Wayland/X11 detection and setup
 if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
