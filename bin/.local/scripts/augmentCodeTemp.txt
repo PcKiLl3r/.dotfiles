@@ -105,7 +105,7 @@ ansible-connection  ansible-galaxy   ansible-playbook   ansible-vault  diff-cove
 
 this was in my current-packages:
 
-""
+"
 Installed packages
 Box2D.x86_64                                         2.4.2-1.fc41                         fedora
 CharLS.x86_64                                        2.4.2-6.fc41                         fedora
@@ -3449,3 +3449,36 @@ zvbi.x86_64                                          0.2.42-1.fc41              
 zxcvbn-c.x86_64                                      2.5-3.fc41                           fedora
 zxing-cpp.x86_64                                     2.2.1-2.fc41                         fedora
 zziplib.x86_64                                       0.13.74-2.fc41                       fedora
+"
+
+
+
+
+
+if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+  alias xclip='wl-copy'
+  alias xsel='wl-paste'
+  alias xsc='wl-copy'
+  alias cclip='wl-copy'
+  alias pclip='wl-paste'
+
+  alias aoeu="hyprctl switchxkblayout at-translated-set-2-keyboard 2" # us
+  alias oeui="hyprctl switchxkblayout at-translated-set-2-keyboard 3" # dvorak (if added)
+  alias htns="hyprctl switchxkblayout at-translated-set-2-keyboard 1" # real-prog-dvorak
+  alias gcrl="hyprctl switchxkblayout at-translated-set-2-keyboard 0" # real-prog-dvo-k (default)
+
+  alias asdf="hyprctl dvorak"
+  alias sdfg="hyprctl real-prog-dvorak"
+else
+  alias xsc="xclip -selection clipboard"
+  alias cclip="xclip -selection clipboard"
+  alias pclip="xclip -selection clipboard"
+
+  alias aoeu="setxkbmap us"
+  alias oeui="setxkbmap dvorak"
+  alias htns="setxkbmap real-prog-dvorak"
+  alias gcrl="setxkbmap real-prog-dvo-k"
+
+  alias asdf="setxkbmap dvorak"
+  alias sdfg="setxkbmap real-prog-dvorak"
+fi
