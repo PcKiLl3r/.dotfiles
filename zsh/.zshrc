@@ -1,5 +1,9 @@
 #zmodload zsh/zprof
 
+# ~/.zshrc
+setopt chase_links   # 'cd' follows to the physical path
+alias cdp='cd -P'    # explicit "physical cd" when you want it
+
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":/home/zorko/.zsh/completions:"* ]]; then export FPATH="/home/zorko/.zsh/completions:$FPATH"; fi
 # If you come from bash you might have to change your $PATH.
@@ -105,7 +109,10 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source ~/.zsh_profile
 
-alias luamake=/home/pckill3r/personal/lua-language-server/3rd/luamake/luamake
+alias luamake=/home/$USER/personal/lua-language-server/3rd/luamake/luamake
+
+alias tmux-initializer=/home/$USER/.local/scripts/tmux-initializer.sh
+alias tmux-sessionizer=/home/$USER/.local/scripts/tmux-sessionizer.sh
 
 # bun completions
 [ -s "/home/pckill3r/.bun/_bun" ] && source "/home/pckill3r/.bun/_bun"

@@ -1,5 +1,7 @@
-#tmux-initializer
+
 #!/usr/bin/env bash
+
+#tmux-initializer
 
 find_ready_tmux() {
     local current_dir="$1"
@@ -56,10 +58,11 @@ else
             find -L \
                 ~/.config/nvim \
                 ~/.dotfiles/bin/.local \
-                ~/Downloads \
                 ~/personal \
                 ~/personal/custom-dev-exp \
+                ~/.config/nvim \
                 -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"
+            printf '%s\n' "$HOME/.dotfiles"
         } | fzf
     )
 fi

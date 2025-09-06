@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# find the MAC for any device named “WH-1000XM6”
+MAC=$(bluetoothctl devices | awk '/Logitech BT Adapter/ {print $2}')
+
+if [ -z "$MAC" ]; then
+  echo "❌ Could not find Logitech BT Adapter. Make sure it's in pairing/trusted list."
+  exit 1
+fi
+
+# choose action based on first argument
+if [[ "$1" == "off" ]]; then
+  ACTION="disconnect"
+  MSG="Disconnecting"
+else
+  ACTION="connect"
+  MSG="Connecting"
+fi
+
+echo "🔌 $MSG $MAC…"
+bluetoothctl -- "$ACTION" "$MAC"

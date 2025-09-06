@@ -1,0 +1,4 @@
+xrandr --fb 7680x1440 \
+  --output eDP-1  --mode 1920x1200 --pos 0x0 --primary \
+  --output DP-3-8 --mode 2560x1440 --pos 2560x0 \
+  --output DP-3-1-8 --mode 2560x1440 --pos 5120x0

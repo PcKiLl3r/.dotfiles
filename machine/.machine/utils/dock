@@ -1,34 +1,23 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -Eeuo pipefail
 
-# --- EDIT ME ---
-WALLPAPER="$HOME/.machine/images/backgrounds/bg.png"   # change to your image
-# 66=eDP-1 (laptop), 74=DP-3-8 (now middle), 76=DP-3-1-1 (now left)
-LAPTOP_ID=66
-MID_4K_ID=74
-LEFT_4K_ID=76
-LAPTOP_MODE=78          # 1920x1200@60 from `kscreen-doctor -o`
-FOURK_MODE=155          # 3840x2160@60 from `kscreen-doctor -o`
-# --- /EDIT ME ---
+LAPTOP=eDP-1
+L=DP-3-1-1     # left 4K
+M=DP-3-8       # mid  4K
 
-# Make sure the KDE KScreen service is running (kscreen-doctor needs it)
-systemctl --user start plasma-kscreen.service >/dev/null 2>&1 || true
-# Small settle to avoid any hotplug churn
-sleep 0.2
+wait(){ local o=$1 m=$2; while ! xrandr | awk -v o="$o" -v m="$m" '$1==o{inb=1;next} inb&&/ connected/{exit} inb&&$1==m{f=1} END{exit f?0:1}'; do sleep 0.5; done; }
 
-# Layout: [LEFT_4K] [MID_4K] [LAPTOP] — bottom aligned
-# X positions: 0, 3840, 7680; laptop Y = 2160 - 1200 = 960
-kscreen-doctor \
-  output.${LEFT_4K_ID}.enable output.${LEFT_4K_ID}.mode.${FOURK_MODE} output.${LEFT_4K_ID}.rotation.none output.${LEFT_4K_ID}.position.0,0 \
-  output.${MID_4K_ID}.enable  output.${MID_4K_ID}.mode.${FOURK_MODE}  output.${MID_4K_ID}.rotation.none  output.${MID_4K_ID}.position.3840,0 \
-  output.${LAPTOP_ID}.enable  output.${LAPTOP_ID}.mode.${LAPTOP_MODE} output.${LAPTOP_ID}.rotation.none  output.${LAPTOP_ID}.position.7680,960
+# Ensure native modes are there (scaling operates on the current/native mode)
+wait "$L" 3840x2160
+wait "$M" 3840x2160
 
-# Mark laptop as primary (kscreen-doctor doesn’t set X11 “primary”)
-# xrandr --output eDP-1 --primary || true
+# Scale 4K -> logical 1080p, place them like at work
+xrandr --fb 5760x1200 \
+  --output "$LAPTOP" --mode 1920x1200 --scale 1x1     --pos 0x0 --primary \
+  --output "$M"      --mode 3840x2160 --scale 0.5x0.5 --pos 1920x0 \
+  --output "$L"      --mode 3840x2160 --scale 0.5x0.5 --pos 3840x0
 
-# Set wallpaper across all heads (requires `feh`; `sudo dnf install feh`)
-if command -v feh >/dev/null 2>&1 && [ -f "$WALLPAPER" ]; then
-  feh --no-fehbg --bg-fill "$WALLPAPER"
-else
-  echo "[dock.sh] Skipped wallpaper: install 'feh' and/or set WALLPAPER path." >&2
-fi
+# Optional: tighten panning to avoid scrollable desktops
+xrandr \
+  --output "$M" --panning 1920x1080+1920+0 \
+  --output "$L" --panning 1920x1080+3840+0

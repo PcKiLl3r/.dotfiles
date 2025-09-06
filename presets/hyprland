@@ -1,7 +1,11 @@
+hypr
 bin
 nvim
-shell
 tmux
+shell
+machine
+personal
 zsh
-xkb
-hypr
+work
+git
+ssh

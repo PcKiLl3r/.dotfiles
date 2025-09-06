@@ -1,0 +1,15 @@
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[user]
+	email = pckill3r@gmail.com
+	name = pckill3r
+[alias]
+	rename = branch -m
+[rerere]
+	enabled = true
+[rebase]
+	autoStash = false
