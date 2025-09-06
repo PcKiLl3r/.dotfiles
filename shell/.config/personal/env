@@ -13,6 +13,7 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
     alias xsel='wl-paste'
     alias xsc='wl-copy'
     export STOW_FOLDERS="bin,nvim,tmux,shell,machine,personal,zsh,xkb,work,git,ssh,alacritty,hypr"
+    export XKB_CONFIG_ROOT="$HOME/.config/xkb"
 else
     # X11 setup
     setxkbmap -option caps:ctrl_modifier
