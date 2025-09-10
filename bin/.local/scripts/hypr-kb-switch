@@ -18,8 +18,13 @@ case "$1" in
         hyprctl switchxkblayout at-translated-set-2-keyboard 0
         notify-send "Keyboard" "Switched to Real Prog Dvo-K" -t 1000
         ;;
+    "cycle")
+        hyprctl switchxkblayout at-translated-set-2-keyboard next
+        CURRENT=$(hyprctl devices -j | jq -r '.keyboards[] | select(.name=="at-translated-set-2-keyboard") | .active_keymap')
+        notify-send "Keyboard" "Switched to $CURRENT" -t 1000
+        ;;
     *)
-        echo "Usage: $0 {us|dvorak|real-prog-dvorak|real-prog-dvo-k}"
+        echo "Usage: $0 {us|dvorak|real-prog-dvorak|real-prog-dvo-k|cycle}"
         exit 1
         ;;
 esac

@@ -45,13 +45,23 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ] || [ -n "$WAYLAND_DISPLAY" ]; then
   alias cclip='wl-copy'
   alias pclip='wl-paste'
 
-  alias aoeu="hyprctl switchxkblayout at-translated-set-2-keyboard 2" # us
-  alias oeui="hyprctl switchxkblayout at-translated-set-2-keyboard 3" # dvorak (if added)
-  alias htns="hyprctl switchxkblayout at-translated-set-2-keyboard 1" # real-prog-dvorak
-  alias gcrl="hyprctl switchxkblayout at-translated-set-2-keyboard 0" # real-prog-dvo-k (default)
 
-  alias asdf="hyprctl switchxkblayout at-translated-set-2-keyboard 3" # dvorak
+  # Direct hyprctl commands (these should work)
+  alias aoeu="hyprctl switchxkblayout at-translated-set-2-keyboard 2" # us
+  alias htns="hyprctl switchxkblayout at-translated-set-2-keyboard 1" # real-prog-dvorak
+  alias gcrl="hyprctl switchxkblayout at-translated-set-2-keyboard 0" # real-prog-dvo-k
+
+  alias asdf="hyprctl switchxkblayout at-translated-set-2-keyboard 0" # dvorak
   alias sdfg="hyprctl switchxkblayout at-translated-set-2-keyboard 1" # real-prog-dvorak
+
+  # Script-based cycling (make sure script is executable)
+  alias kb-cycle="$HOME/.local/scripts/hypr-kb-switch cycle"
+
+  # alias aoeu="hyprctl switchxkblayout at-translated-set-2-keyboard 2" # us
+  # alias oeui="hyprctl switchxkblayout at-translated-set-2-keyboard 3" # dvorak (if added)
+  # alias htns="hyprctl switchxkblayout at-translated-set-2-keyboard 1" # real-prog-dvorak
+  # alias gcrl="hyprctl switchxkblayout at-translated-set-2-keyboard 0" # real-prog-dvo-k (default)
+
 else
   alias xsc="xclip -selection clipboard"
   alias cclip="xclip -selection clipboard"
