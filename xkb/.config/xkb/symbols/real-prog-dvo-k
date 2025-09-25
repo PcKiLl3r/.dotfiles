@@ -1,6 +1,6 @@
 xkb_symbols "real-prog-dvo-k" {
 
-    name[Group1]= "English (Real Programmers Dvorak)";
+    name[Group1]= "English (Real Programmers Dvorak - Remapped for Kinesis)";
 
     // Remap the Home key to act as the Windows (Super_L) key
     key <HOME> { [ Super_L ] };
