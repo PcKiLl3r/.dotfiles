@@ -9,6 +9,10 @@ xkb_symbols "real-prog-dvo-k" {
     // For example, remap LWIN to Alt_L if desired
     key <LWIN> { [ Alt_L, Meta_L ] };
 
+    clear Mod4;
+    modifier_map Mod4 { <HOME> };
+    modifier_map Mod1 { <LWIN> };
+
     key <TLDE> { [       dollar,        asciitilde, dead_grave, dead_tilde      ] };
 
     key <AE01> { [          plus,       1               ]       };
