@@ -159,7 +159,9 @@ export PRTE_MCA_plm=ssh
 export PATH=/usr/lib64/openmpi/bin/prted:$PATH
 
 # Load Angular CLI autocompletion.
-source <(ng completion script)
+if command -v ng >/dev/null 2>&1; then
+  source <(ng completion script)
+fi
 
 # export NVM_DIR="$HOME/.config/nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

@@ -24,4 +24,7 @@ sudo dnf install -y \
   eza \            # Better ls
   zoxide \         # Better cd
   starship         # Better prompt
+
+# Angular CLI for frontend tooling
+sudo npm install -g @angular/cli
 ````
