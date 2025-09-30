@@ -27,9 +27,9 @@
     "spacing": 10
   },
   "clock": {
-    "timezone": "America/Denver",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%d - %H:%M}"
+      "format": "{:%Y-%m-%d %H:%M}",
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "timezone": "Europe/Ljubljana"
   },
   "network": {
     "format-wifi": "󰤢 ",
