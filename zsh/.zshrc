@@ -214,3 +214,4 @@ if (( now_ts - last_ts > one_week )); then
 fi
 # ─────────────────────────────────────────────────────────────────────────────
 #
+# export XKB_CONFIG_ROOT=/usr/share/X11/xkb
