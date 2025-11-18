@@ -1,6 +1,6 @@
 xkb_symbols "real-prog-dvorak" {
 
-    name[Group1]= "English (Real Programmers Dvorak)";
+  name[Group1]= "English (Real Programmers Dvorak)";
 
     key <TLDE> { [       dollar,        asciitilde, dead_grave, dead_tilde      ] };
 

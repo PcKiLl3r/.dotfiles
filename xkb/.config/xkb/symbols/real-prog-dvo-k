@@ -2,11 +2,8 @@ xkb_symbols "real-prog-dvo-k" {
 
     name[Group1]= "English (Real Programmers Dvorak - Remapped for Kinesis)";
 
-    // Remap the Home key to act as the Windows (Super_L) key
     key <HOME> { [ Super_L ] };
 
-    // Optionally, remap the Left Windows key to another function
-    // For example, remap LWIN to Alt_L if desired
     key <LWIN> { [ Alt_L, Meta_L ] };
 
     key <TLDE> { [       dollar,        asciitilde, dead_grave, dead_tilde      ] };

@@ -5,7 +5,12 @@ setopt chase_links   # 'cd' follows to the physical path
 alias cdp='cd -P'    # explicit "physical cd" when you want it
 
 # Add deno completions to search path
-if [[ ":$FPATH:" != *":/home/zorko/.zsh/completions:"* ]]; then export FPATH="/home/zorko/.zsh/completions:$FPATH"; fi
+# if [[ ":$FPATH:" != *":/home/zorko/.zsh/completions:"* ]]; then export FPATH="/home/zorko/.zsh/completions:$FPATH"; fi
+
+# bun completions
+# [ -s "/home/pckill3r/.bun/_bun" ] && source "/home/pckill3r/.bun/_bun"
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -114,8 +119,6 @@ alias luamake=/home/$USER/personal/lua-language-server/3rd/luamake/luamake
 alias tmux-initializer=/home/$USER/.local/scripts/tmux-initializer.sh
 alias tmux-sessionizer=/home/$USER/.local/scripts/tmux-sessionizer.sh
 
-# bun completions
-[ -s "/home/pckill3r/.bun/_bun" ] && source "/home/pckill3r/.bun/_bun"
 
 # Bun
 export BUN_INSTALL="/home/pckill3r/.bun"
@@ -159,9 +162,9 @@ export PRTE_MCA_plm=ssh
 export PATH=/usr/lib64/openmpi/bin/prted:$PATH
 
 # Load Angular CLI autocompletion.
-if command -v ng >/dev/null 2>&1; then
-  source <(ng completion script)
-fi
+# if command -v ng >/dev/null 2>&1; then
+#   source <(ng completion script)
+# fi
 
 # export NVM_DIR="$HOME/.config/nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -178,7 +181,7 @@ DISABLE_AUTO_UPDATE=true
 export GTK_THEME=Adwaita:dark
 
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 export QT_QPA_PLATFORMTHEME=qt5ct

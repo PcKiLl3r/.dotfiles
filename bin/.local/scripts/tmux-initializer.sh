@@ -56,13 +56,13 @@ else
             find -L ~/work -mindepth 1 -maxdepth 3 -type l,d -not -path "*/node_modules/*"
             find -L ~/learn -mindepth 1 -maxdepth 2 -type l,d -not -path "*/node_modules/*"
             find -L \
-                ~/.config/nvim \
                 ~/.dotfiles/bin/.local \
                 ~/personal \
                 ~/personal/custom-dev-exp \
-                ~/.config/nvim \
                 -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"
+            # ~/.config/nvim \
             printf '%s\n' "$HOME/.dotfiles"
+            printf '%s\n' "$HOME/.config/nvim"
         } | fzf
     )
 fi

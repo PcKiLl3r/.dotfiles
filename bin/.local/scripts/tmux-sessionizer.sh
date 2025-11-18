@@ -29,16 +29,17 @@ else
   # If fzf is cancelled, exit immediately (prevents "_" session)
   if ! selected=$(
     {
-      find -L "$HOME/work"  -mindepth 1 -maxdepth 3 \( -type l -o -type d \) -not -path "*/node_modules/*"
-      find -L "$HOME/learn" -mindepth 1 -maxdepth 2 \( -type l -o -type d \) -not -path "*/node_modules/*"
-      find -L \
-        "$HOME/.config/nvim" \
-        "$HOME/.dotfiles/bin/.local" \
-        "$HOME/personal" \
-        "$HOME/personal/custom-dev-exp" \
-        -mindepth 1 -maxdepth 1 \( -type l -o -type d \) -not -path "*/node_modules/*"
-      printf '%s\n' "$HOME/.dotfiles"
-    } | fzf
+            find -L ~/work -mindepth 1 -maxdepth 3 -type l,d -not -path "*/node_modules/*"
+            find -L ~/learn -mindepth 1 -maxdepth 2 -type l,d -not -path "*/node_modules/*"
+            find -L \
+                ~/.dotfiles/bin/.local \
+                ~/personal \
+                ~/personal/custom-dev-exp \
+                -mindepth 1 -maxdepth 1 -type l,d -not -path "*/node_modules/*"
+            # ~/.config/nvim \
+            printf '%s\n' "$HOME/.dotfiles"
+            printf '%s\n' "$HOME/.config/nvim"
+        } | fzf
   ); then
     exit 0
   fi
